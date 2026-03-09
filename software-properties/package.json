@@ -1,0 +1,14 @@
+{
+  "name": "software-properties-presentation",
+  "private": true,
+  "scripts": {
+    "dev": "slidev slides.md --open",
+    "build": "slidev build slides.md",
+    "preview": "npx serve dist",
+    "export": "slidev export slides.md"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^0.50.0",
+    "@slidev/theme-seriph": "latest"
+  }
+}
