@@ -18,11 +18,9 @@ mdc: true
 ### A shared vocabulary for building well-crafted systems
 
 <!--
-Welcome everyone. Today we're doing something different — instead of talking about a specific feature or system, we're going to build a shared language for talking about *how* software is built.
+Welcome everyone. Today we're going to introduce a shared language for talking about *how good software is built*.
 
-This matters because without a shared vocabulary, conversations about quality stay vague. "It's messy." "It breaks." "It's slow." These are symptoms. Today we name the root causes.
-
-This is a map-building session, not a lecture. The reference document is your companion — everything we cover today has depth there.
+Each property is a specific characteristic of your software — something you can plan for, measure, and address. So instead of "it's good" or "it's messy", you know exactly what's working, what's failing, and why.
 -->
 
 ---
@@ -43,16 +41,14 @@ class: text-center
 <!--
 Ask this out loud. Give them 5 seconds of silence.
 
-These are all real experiences from our work. The goal today is to give each of these a name — so we can plan for them, measure them, and talk about them precisely.
-
-"It works" is the floor, not the ceiling.
+The goal today: give each of these a name — so we can plan for them, measure them, and argue precisely. Not just "it's messy."
 -->
 
 ---
 layout: center
 ---
 
-# What makes software *good*?
+# From vague to precise
 
 <div class="grid grid-cols-2 gap-8 mt-8 max-w-3xl mx-auto">
   <div class="border rounded-lg p-5 opacity-60">
@@ -65,9 +61,9 @@ layout: center
   <div class="border-2 border-green-500 rounded-lg p-5">
     <div class="text-green-600 font-bold mb-4">What we should say</div>
     <div class="text-sm mb-2"><strong>Reliability</strong> — it recovers from failures automatically</div>
-    <div class="text-sm mb-2"><strong>Security</strong> — no known vulnerabilities in production</div>
+    <div class="text-sm mb-2"><strong>Security</strong> — no critical CVEs in dependencies; all endpoints verify authorization</div>
     <div class="text-sm mb-2"><strong>Maintainability</strong> — a new dev can contribute within a week</div>
-    <div class="text-sm"><strong>Performance</strong> — the slowest 1% of users still get a fast response</div>
+    <div class="text-sm"><strong>Performance</strong> — page loads under 2s; API responses under 200ms</div>
   </div>
 </div>
 
@@ -141,104 +137,6 @@ For deep-dive properties: I'll give the definition and key concepts, share what 
 For quick-pass: I give the definition and one key insight. Questions go to the end or to the reference doc.
 
 The last 15 minutes is the most important part: we'll talk about how to pick which properties to focus on per project, and what this means for our definition of done.
--->
-
----
-layout: section
----
-
-# Groups at a Glance
-
----
-
-## Groups 1–3
-
-<div class="grid grid-cols-3 gap-6 mt-6">
-  <div class="border-l-4 border-blue-500 pl-4">
-    <div class="font-bold text-blue-600 text-sm">GROUP 1</div>
-    <div class="text-lg font-semibold mt-1">Reliability & Correctness</div>
-    <div class="text-sm text-gray-500 mt-1 italic">Does the system do what it's supposed to, consistently?</div>
-    <div class="mt-3 text-sm space-y-1">
-      <div>Correctness</div>
-      <div>Reliability / Resilience</div>
-      <div>Availability</div>
-      <div>Data Integrity</div>
-    </div>
-  </div>
-  <div class="border-l-4 border-purple-500 pl-4">
-    <div class="font-bold text-purple-600 text-sm">GROUP 2</div>
-    <div class="text-lg font-semibold mt-1">User Experience</div>
-    <div class="text-sm text-gray-500 mt-1 italic">Is the system good to use?</div>
-    <div class="mt-3 text-sm space-y-1">
-      <div>Usability</div>
-      <div>Performance</div>
-    </div>
-  </div>
-  <div class="border-l-4 border-red-500 pl-4">
-    <div class="font-bold text-red-600 text-sm">GROUP 3</div>
-    <div class="text-lg font-semibold mt-1">Security & Trust</div>
-    <div class="text-sm text-gray-500 mt-1 italic">Is the system safe and accountable?</div>
-    <div class="mt-3 text-sm space-y-1">
-      <div>Security</div>
-      <div>Privacy</div>
-      <div>Auditability</div>
-    </div>
-  </div>
-</div>
-
-<!--
-Group 1 is the foundation. If your system isn't correct and reliable, nothing else matters. These properties determine if the system does what it's supposed to do, every time.
-
-Group 2 is where the user lives. Usability is about how easy it is to use. Performance is how fast it feels. These are the properties customers experience directly.
-
-Group 3 is about trust. Security is protection. Privacy is respecting users' data rights. Auditability is being able to prove what happened — critical for enterprise customers.
--->
-
----
-
-## Groups 4–6
-
-<div class="grid grid-cols-3 gap-6 mt-6">
-  <div class="border-l-4 border-green-500 pl-4">
-    <div class="font-bold text-green-600 text-sm">GROUP 4</div>
-    <div class="text-lg font-semibold mt-1">Architecture</div>
-    <div class="text-sm text-gray-500 mt-1 italic">Is it well-designed for change, growth, and integration?</div>
-    <div class="mt-3 text-sm space-y-1">
-      <div>Modularity</div>
-      <div>Extensibility</div>
-      <div>Interoperability</div>
-      <div>Portability</div>
-    </div>
-  </div>
-  <div class="border-l-4 border-yellow-500 pl-4">
-    <div class="font-bold text-yellow-600 text-sm">GROUP 5</div>
-    <div class="text-lg font-semibold mt-1">Engineering Excellence</div>
-    <div class="text-sm text-gray-500 mt-1 italic">Is it easy to build, change, and evolve?</div>
-    <div class="mt-3 text-sm space-y-1">
-      <div>Maintainability</div>
-      <div>Testability</div>
-      <div>Deployability</div>
-    </div>
-  </div>
-  <div class="border-l-4 border-orange-500 pl-4">
-    <div class="font-bold text-orange-600 text-sm">GROUP 6</div>
-    <div class="text-lg font-semibold mt-1">Scale & Operations</div>
-    <div class="text-sm text-gray-500 mt-1 italic">Can it handle growth? Can we understand it in production?</div>
-    <div class="mt-3 text-sm space-y-1">
-      <div>Scalability</div>
-      <div>Observability</div>
-    </div>
-  </div>
-</div>
-
-<!--
-Group 4 is about structure. These properties determine how well the system can change, grow, and connect to other systems. Modularity and Extensibility are internal. Interoperability is about the outside world. For IDM, Interoperability is a top-3 property.
-
-Group 5 is the team's day-to-day experience. How fast can you change things safely? How do you know it works? How do you ship confidently? These properties directly determine team velocity.
-
-Group 6 is operations. Can the system grow with your user base? Can you understand what's happening in production when something goes wrong?
-
-Note: a property can appear in more than one group — Performance sits in both Group 2 and Group 6.
 -->
 
 ---
@@ -563,29 +461,31 @@ The design handoff contract: engineers implement what designers specify. If you 
 
 <br>
 
-- **Latency percentiles** — p50, p95, p99 (not averages — averages always lie)
-- **Core Web Vitals** — LCP < 2.5s · INP < 200ms · CLS < 0.1
+- **Response time targets** — page load under 2s · API responses under 200ms
+- **Don't measure averages — measure worst cases** — if 99 users get 50ms and 1 gets 5 seconds, the average looks fine but someone had a terrible experience
+  - **p50** — the median; half of requests are faster than this
+  - **p95** — 95% of requests are faster; this is your near-worst case
+  - **p99** — only 1 in 100 requests is slower than this; your true worst case
 - **Cache hit rate** — how often data is served from cache vs database
 
 <br>
 
 📍 **SDLC:** Requirements / Design · Development · Testing
 
-🔴 **Red flag:** p99 latency is 10× the p50 — a class of requests is consistently very slow
+🔴 **Red flag:** most users are fast but some requests are consistently 10–100× slower
 
 <!--
 SPEAKER NOTES — QUICK PASS
 
 Performance has two perspectives: user-facing (how fast does it feel?) and system-level (how efficiently does it use resources?). Both matter.
 
-The key insight: AVERAGES LIE. Always measure in percentiles.
-- p50 is the median — half of requests are faster
-- p95 means 95% of requests are faster than this
-- p99 means 99% of requests are faster — this is your worst 1% of user experiences
+Averages are misleading. If 99 users get a 50ms response and 1 user waits 5 seconds, the average is about 100ms — looks fine in a dashboard, but that one user had a broken experience. You want to know about the slow outliers.
 
-A system with p50=50ms and p99=5000ms has a "good average" but a broken tail. The 1% experiencing 5 seconds are your most frustrated users.
+That's what percentiles give you — rank all your requests by response time and ask: what does the slowest 1% look like? That's your real worst case.
 
-Profile before optimizing. "The database is slow" isn't actionable. "The query on line 47 that does a full table scan because it lacks an index on user_id" is.
+Practical targets: page loads under 2 seconds, API calls under 200ms. These are good starting benchmarks, but the right numbers depend on your product.
+
+Profile before optimizing. "The database is slow" isn't actionable. "This query does a full table scan because it's missing an index" is.
 
 IDM example: inbound sync was identified as too slow through benchmarking. Profiling pinpointed specific bottlenecks, and targeted refactoring brought it to an acceptable level. No guessing.
 
@@ -1313,76 +1213,21 @@ layout: section
 
 ---
 
-# Priority Guide
+# How to Define Priorities
 
-> Not all 18 properties can be addressed at once.
+> Which of these 18 properties matter most for your project — right now?
 
-<div class="grid grid-cols-5 gap-3 mt-6 text-sm">
-  <div class="border-l-4 border-red-500 pl-3">
-    <div class="font-bold text-red-600 mb-2">Priority 1<br>Foundation</div>
-    <div class="space-y-1">
-      <div>Correctness</div>
-      <div>Security</div>
-      <div>Modularity</div>
-      <div>Testability</div>
-    </div>
-  </div>
-  <div class="border-l-4 border-orange-500 pl-3">
-    <div class="font-bold text-orange-600 mb-2">Priority 2<br>Operations</div>
-    <div class="space-y-1">
-      <div>Observability</div>
-      <div>Reliability</div>
-      <div>Deployability</div>
-      <div>Maintainability</div>
-    </div>
-  </div>
-  <div class="border-l-4 border-yellow-500 pl-3">
-    <div class="font-bold text-yellow-600 mb-2">Priority 3<br>Growth</div>
-    <div class="space-y-1">
-      <div>Performance</div>
-      <div>Scalability</div>
-      <div>Interoperability</div>
-      <div>Extensibility</div>
-    </div>
-  </div>
-  <div class="border-l-4 border-blue-500 pl-3">
-    <div class="font-bold text-blue-600 mb-2">Priority 4<br>Trust</div>
-    <div class="space-y-1">
-      <div>Auditability</div>
-      <div>Availability</div>
-      <div>Privacy</div>
-      <div>Data Integrity</div>
-    </div>
-  </div>
-  <div class="border-l-4 border-green-500 pl-3">
-    <div class="font-bold text-green-600 mb-2">Priority 5<br>Polish</div>
-    <div class="space-y-1">
-      <div>Usability</div>
-      <div>Portability</div>
-    </div>
-  </div>
-</div>
+| Group | Theme | Properties |
+|-------|-------|------------|
+| 1 | Reliability & Correctness | Correctness, Reliability, Availability, Data Integrity |
+| 2 | User Experience | Usability, Performance |
+| 3 | Security & Trust | Security, Privacy, Auditability |
+| 4 | Architecture | Modularity, Extensibility, Interoperability, Portability |
+| 5 | Engineering Excellence | Maintainability, Testability, Deployability |
+| 6 | Scale & Operations | Scalability, Observability |
 
 <!--
 SPEAKER NOTES
-
-This priority guide is a general default — not a rule. It reflects what's hardest to retrofit and what has the largest ripple effect when neglected.
-
-Priority 1 — Foundation: these cannot be added cheaply after the fact.
-- Correctness: if it's not right, nothing else matters
-- Security: especially for IDM. A security architecture added after launch requires rebuilding the authorization model
-- Modularity: architectural decisions made in week 1 are the most expensive to change in year 2
-- Testability: code written without testability in mind cannot be safely changed
-
-Priority 2 — Operational Readiness: as products go to real customers, these determine your reliability and velocity.
-
-Priority 3 — Growth: invest in these as scale and integration complexity increase. "Design for it before you need it, but not before you need it."
-
-Priority 4 — Trust: enterprise customers ask about SOC 2, GDPR compliance, and SLAs. Before they ask, have the answers.
-
-Priority 5 — Polish: continuously invest, but make formal commitments when UX becomes a differentiator.
-
-Key message: this is a default ordering. For your specific project, the order changes based on what comes next.
 -->
 
 ---
@@ -1514,3 +1359,16 @@ Next step: I'd like to do a follow-up workshop — 90 minutes per product — wh
 
 Thank you. Questions?
 -->
+
+---
+layout: center
+class: text-center
+---
+
+# Thank You
+
+### Questions?
+
+<br>
+
+> *"Good software is not an accident — it's a set of properties you planned for."*
