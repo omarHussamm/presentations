@@ -50,41 +50,35 @@ These are all real experiences from our work. The goal today is to give each of 
 
 ---
 layout: center
-class: text-center
 ---
 
 # What makes software *good*?
 
-<br>
-
-<div class="grid grid-cols-3 gap-6 mt-6 text-left max-w-2xl mx-auto">
-  <div class="border rounded-lg p-4 opacity-50">
-    <div class="text-red-500 font-bold mb-2">Not this</div>
-    <div class="text-sm">Features shipped</div>
-    <div class="text-sm">Lines of code</div>
-    <div class="text-sm">Tests passing</div>
+<div class="grid grid-cols-2 gap-8 mt-8 max-w-3xl mx-auto">
+  <div class="border rounded-lg p-5 opacity-60">
+    <div class="text-red-500 font-bold mb-4">What we say</div>
+    <div class="text-sm mb-2 italic">"Make it more robust"</div>
+    <div class="text-sm mb-2 italic">"It needs to be secure"</div>
+    <div class="text-sm mb-2 italic">"The code is messy"</div>
+    <div class="text-sm italic">"It's too slow"</div>
   </div>
-  <div class="text-4xl flex items-center justify-center text-gray-400">→</div>
-  <div class="border-2 border-green-500 rounded-lg p-4">
-    <div class="text-green-600 font-bold mb-2">This</div>
-    <div class="text-sm">Named properties</div>
-    <div class="text-sm">Plannable from day 1</div>
-    <div class="text-sm">Measurable over time</div>
+  <div class="border-2 border-green-500 rounded-lg p-5">
+    <div class="text-green-600 font-bold mb-4">What we should say</div>
+    <div class="text-sm mb-2"><strong>Reliability</strong> — it recovers from failures automatically</div>
+    <div class="text-sm mb-2"><strong>Security</strong> — no known vulnerabilities in production</div>
+    <div class="text-sm mb-2"><strong>Maintainability</strong> — a new dev can contribute within a week</div>
+    <div class="text-sm"><strong>Performance</strong> — the slowest 1% of users still get a fast response</div>
   </div>
 </div>
 
 <!--
-The problem isn't that we don't care about quality. The problem is we don't have a precise, shared language for it.
+We all care about quality. The problem is we don't have a precise, shared language for it.
 
-When someone says "make it more maintainable" — what does that mean concretely? When we say "it needs to be secure" — what specifically do we check?
+"Make it more robust" — what do you actually change? What do you measure? Without precision, these are just vibes.
 
-A property is something you can:
-1. Name precisely
-2. Plan for at the start of a project
-3. Measure and trend over time
-4. Assign to a phase of the SDLC
+On the right: the same concerns, but each one has a name and a clear meaning. These are properties — and each one can be planned for, measured, and improved over time.
 
-That's what we're building today.
+That's what we're building today — a shared vocabulary. Later we'll get into the specific metrics for each property.
 -->
 
 ---
