@@ -4,20 +4,6 @@ A task is a contract between the person defining the work and the person doing i
 
 ---
 
-## The Standard
-
-1. **Every non-trivial task must have all six fields.** Title, Goal, Context, Requirements, Acceptance Criteria, and Out of Scope. A task missing any of these is not ready to be picked up.
-
-2. **Acceptance criteria must be testable.** Each AC is a pass/fail statement — not a description. "The avatar loads correctly" is not an AC. "Avatar is visible on first page load without refreshing" is.
-
-3. **Out of Scope is mandatory.** Without it, developers make assumptions. Two developers will make different assumptions. Both will be wrong in some way.
-
-4. **Requirements describe what the system must do — not how.** The implementation is the developer's responsibility. The requirement is yours.
-
-5. **A task that can't be picked up cold is not done.** If a developer needs to ask you to explain it, rewrite it.
-
----
-
 ## Task Template
 
 ```
@@ -39,10 +25,28 @@ Acceptance Criteria:
 - [ ] [Pass/fail condition]
 - [ ] [...]
 
-Out of Scope:
+Out of Scope: (required when boundaries are ambiguous)
 - [What is explicitly NOT included in this task]
 - [...]
+
+Implementation Notes: (optional)
+- [Technical hints, not prescriptions — e.g. "there's already a utility for this in X", "follow the pattern used in Y", "library Z is already imported and handles this"]
+- [...]
 ```
+
+---
+
+## The Standard
+
+1. **Every non-trivial task must have all required fields.** Goal, Context, Requirements, and Acceptance Criteria. If any of these are blank, the task is not ready to enter the sprint — get the missing information before it moves forward.
+
+2. **Acceptance criteria must be testable.** Each AC is a pass/fail statement — not a description. "The avatar loads correctly" is not an AC. "Avatar is visible on first page load without refreshing" is.
+
+3. **Out of Scope is required when the boundaries aren't obvious.** If a developer could reasonably assume something adjacent is included, write it down. Without it, two developers will make different assumptions — and both will be wrong in some way.
+
+4. **Requirements describe what the system must do — not how.** The implementation is the developer's responsibility. The requirement is yours.
+
+5. **A task that can't be picked up cold is not done.** If a developer needs to ask you to explain it, rewrite it.
 
 ---
 
@@ -65,18 +69,6 @@ Out of Scope:
 
 ---
 
-## What to Avoid
-
-| Anti-pattern | Why it's a problem |
-|---|---|
-| `Fix the user profile page` | No goal, no scope, no ACs — developer has to guess everything |
-| ACs that say "it should work" | Not testable — "work" means different things to different people |
-| Missing Out of Scope | Developer builds adjacent things they assumed were included |
-| Requirements that describe the implementation | You're constraining the how, not the what — this makes tasks brittle |
-| No Context field | Developer wastes time searching for background information that you already have |
-
----
-
 ## Examples
 
 ### Bad
@@ -85,6 +77,8 @@ Title: Fix login
 
 Description: The login page is broken sometimes. Please fix it and make it faster.
 ```
+
+No goal, no scope, no ACs. The developer has to guess what "broken" means, what "faster" means, and what done looks like.
 
 ### Good
 ```
@@ -108,4 +102,20 @@ Acceptance Criteria:
 Out of Scope:
 - Email normalization on signup
 - Password reset flow
+
+Implementation Notes:
+- The normalization logic already lives in `AuthService.NormalizeEmail` — use that rather than re-implementing it
 ```
+
+---
+
+## What the Developer Will Do With This Task
+
+When a developer picks up your task, they will:
+
+1. Read the **Goal** first to understand the intent — this is the lens they use when edge cases appear that the requirements don't cover.
+2. Read the **Acceptance Criteria** as their definition of done — they'll verify against these before opening a PR.
+3. Check **Implementation Notes** before touching the codebase.
+4. If a required field is missing or too vague to act on, they'll flag it rather than guess — which means the task comes back to you anyway, just later and more expensively.
+
+A well-written task is not extra work.

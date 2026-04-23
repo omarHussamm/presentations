@@ -8,7 +8,7 @@ Code review is the team's primary quality gate. It exists to ship correct, secur
 
 1. **Review within 24 hours of a PR being marked "Ready for Review."** A PR sitting unreviewed is a bottleneck for the whole team — especially for junior developers waiting to know if they're on the right track.
 
-2. **Focus on correctness, security, tests, and clarity.** These are your jobs. Style and formatting are the linter's job.
+2. **Focus on correctness, security, performance, and clarity.** These are your jobs. Style and formatting are the linter's job.
 
 3. **Every comment must be specific and actionable.** "This is wrong" is not a review comment. "This could throw a null reference if `user` is undefined — add a guard here" is.
 
@@ -31,10 +31,10 @@ Code review is the team's primary quality gate. It exists to ship correct, secur
 - Are there any hardcoded secrets, tokens, or credentials?
 - Are there SQL injection or other injection risks?
 
-### Tests
-- Are the acceptance criteria covered by tests?
-- Are edge cases tested, not just the happy path?
-- Are tests meaningful — do they assert the right things?
+### Performance
+- Are there N+1 queries or unbounded data loads?
+- Is pagination applied where the result set could be large?
+- Is anything blocking the main thread unnecessarily?
 
 ### Clarity
 - Can you understand what the code does without the author explaining it?
@@ -43,7 +43,7 @@ Code review is the team's primary quality gate. It exists to ship correct, secur
 
 ### PR quality
 - Does the description explain what changed and why?
-- Is the "How to test" section clear enough to follow?
+- Is the "How to verify" section clear enough to follow?
 - Is the Jira ticket linked?
 
 ---
@@ -86,11 +86,9 @@ All three. If you can't explain why it's a problem, reconsider whether it's actu
 
 ## How to Receive Feedback
 
-1. **Separate code from identity.** A comment on your PR is about the code. It is not about you.
-2. **If a comment is unclear, ask for clarification before dismissing it or silently ignoring it.**
-3. **Respond to every comment.** "Done", "Fixed in latest commit", "I disagree — here's why" are all valid responses. No response is not.
-4. **Disagreement is fine.** Make your case clearly. If you can't reach agreement, involve a third person. Don't silently implement something you think is wrong.
-5. **Re-request review after addressing comments.** Don't assume the reviewer will notice you pushed new commits.
+1. **Separate code from identity.** A comment on your PR is about the code, not you.
+2. **Respond to every comment.** "Done", "Fixed in latest commit", "I disagree — here's why" are all valid. No response is not.
+3. **Re-request review after addressing comments.** Don't assume the reviewer will notice you pushed new commits.
 
 ---
 
@@ -123,7 +121,7 @@ Reviewing is part of your job — not optional work between your own tasks. When
 |---|---|
 | Reviewing for style (spacing, naming preferences) | Wastes review time on things the linter handles; misses real issues |
 | "This is wrong" with no explanation | The author can't fix what they don't understand |
-| Approving without actually testing | Rubber-stamp reviews erode the value of the quality gate |
+| Approving without reading the diff | Rubber-stamp reviews erode the value of the quality gate |
 | Blocking a PR on out-of-scope issues | Creates work inflation and blocks unrelated work |
 | Leaving comments unresolved for days | The PR is stuck; the developer is blocked; the ticket is stalled |
 | Not re-requesting review after pushing changes | The reviewer doesn't know you've addressed their comments |

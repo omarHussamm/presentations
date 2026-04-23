@@ -6,7 +6,7 @@ A PR is a proposal to change the codebase. It needs to explain what changed, why
 
 ## The Standard
 
-1. **Every PR must have a complete description.** Title, summary, how to test, and a linked Jira ticket. A PR description that says "fixes the thing" will sit unreviewed.
+1. **Every PR must have a complete description.** Title, summary, how to verify, and a linked Jira ticket. A PR description that says "fixes the thing" will sit unreviewed.
 
 2. **One task = one PR.** If your PR touches more than one Jira ticket, it should be two PRs.
 
@@ -14,9 +14,9 @@ A PR is a proposal to change the codebase. It needs to explain what changed, why
 
 4. **Screenshots are required for UI changes.** Before and after. Reviewers cannot visualize what CSS changes look like by reading diffs.
 
-5. **Open as a draft early.** You don't have to wait until a task is 100% complete. Opening a draft creates visibility and enables early feedback.
+5. **Keep PRs small and focused.** A PR that can be reviewed in 15–30 minutes gets reviewed today. A PR that takes an hour gets deferred until tomorrow.
 
-6. **Keep PRs small and focused.** A PR that can be reviewed in 15–30 minutes gets reviewed today. A PR that takes an hour gets deferred until tomorrow.
+6. **Notify the team on Teams after opening a PR.** Post the PR link in the team channel. Don't assume people will find it on their own.
 
 ---
 
@@ -49,17 +49,12 @@ refactor: extract auth token validation into shared utility
 ## PR Description Template
 
 ```markdown
-## What
-[One or two sentences describing what changed. Not how — what.]
-
-## Why
-[Why this change was needed. Link to the Jira ticket.]
+## Summary
+[Two or three sentences. What changed and why. Link to the Jira ticket.]
 Jira: [TICKET-ID](link)
 
-## How to test
-1. [Step-by-step instructions a reviewer can follow]
-2. [Be specific — which user, which URL, which action]
-3. [What should happen at each step]
+## How to verify
+[What the reviewer should look for when reading the diff. Not QA steps — the specific behavior or logic to confirm is correct.]
 
 ## Screenshots
 [Before and after — required for any UI change. Delete this section if no UI change.]
@@ -73,32 +68,49 @@ Jira: [TICKET-ID](link)
 
 ---
 
+## Example
+
+### Bad
+```markdown
+fix login bug
+
+fixed the issue with login not working sometimes
+```
+
+### Good
+```markdown
+fix: login fails when email contains uppercase characters
+
+## Summary
+Users with uppercase letters in their email address cannot log in. The comparison became case-sensitive after the normalization refactor in AUTH-75.
+Jira: [AUTH-88](https://jira.example.com/AUTH-88)
+
+## How to verify
+- The email comparison in the login flow is case-insensitive
+- Stored email format in the database is unchanged
+
+## Checklist
+- [x] Tests added or updated
+- [x] No console.log or debug code left
+- [x] No unrelated changes included
+- [x] CI is green
+```
+
+---
+
 ## What to Include vs Exclude
 
 ### Include
 - Everything required to implement the Jira task
 - Tests covering the acceptance criteria
 - Updated documentation if behavior changed (API docs, README if relevant)
+- If you changed a shared method, verify its callers are not broken and note the impact surface in the summary
 
 ### Exclude
 - Unrelated changes — even small ones ("while I was in there I also fixed...")
 - Commented-out code
 - Console logs, debug statements, TODO comments that aren't tracked
 - Changes outside the task scope (open a new ticket instead)
-
----
-
-## Draft PRs
-
-Open a draft PR when:
-- You want early feedback on your approach before finishing
-- You want CI to run on your branch without requesting review
-- You want your work to be visible to the team while in progress
-
-A draft PR signals: "I'm working on this, not ready for review yet." Convert it to "Ready for Review" when:
-- All acceptance criteria are met
-- CI is green
-- Description is complete
 
 ---
 
@@ -121,8 +133,9 @@ If a task produces a large PR, consider:
 | Anti-pattern | Why it's a problem |
 |---|---|
 | PR description: "fixes the bug" | Reviewer has to read every line to understand what changed and why |
-| No "How to test" section | Reviewer guesses how to verify — or doesn't verify at all |
+| No "How to verify" section | Reviewer doesn't know what to look for — or doesn't verify at all |
 | No Jira link | No traceability between code and product decisions |
 | Requesting review on red CI | Forces reviewer to wait, or they review code that's about to change |
 | 800-line PR | Reviewed superficially or deferred — high-risk merge |
 | Including unrelated fixes | Mixes concerns — harder to review, harder to revert if something breaks |
+| Not notifying the team on Teams | PR sits unreviewed because nobody knew it was open |

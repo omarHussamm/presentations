@@ -20,6 +20,7 @@ Local CI runs the same checks as the remote pipeline — on your machine, before
 
 | Git event | Checks |
 |---|---|
+| `commit-msg` | Conventional commit format |
 | `pre-commit` | Lint, format check |
 | `pre-push` | Tests, build check |
 
@@ -41,6 +42,7 @@ Total time: ~10 minutes of waiting, multiple push-fix cycles.
 With Lefthook:
 
 ```
+git commit → commit-msg fails (bad format) → fix → commit
 git commit → lint fails instantly → fix → commit
 git push → tests run locally → fix → push → CI green ✅
 ```
@@ -50,6 +52,17 @@ The failure is caught in seconds. The feedback loop is tight. CI on push is the 
 ---
 
 ## What to Do When a Hook Fails
+
+### Commit message failure
+
+```bash
+# Fix the message on your last commit
+git commit --amend -m "feat(auth): add OAuth2 login"
+```
+
+Format: `type(scope): description`
+
+Valid types: `feat`, `fix`, `chore`, `refactor`, `docs`, `test`
 
 ### Lint failure on commit
 
@@ -85,6 +98,7 @@ If the pre-push hook is slow, investigate whether the test scope can be narrowed
 
 | Anti-pattern | Why it's a problem |
 |---|---|
+| `git commit --no-verify` on a bad message | Skips format check — inconsistent commit history, harder to generate changelogs |
 | `git commit --no-verify` | Skips lint and format — code with known issues reaches the PR |
 | `git push --no-verify` | Skips tests — broken code reaches CI and blocks the team |
 | Bypassing "just this once" | It becomes a habit. Every bypass normalizes the next one. |
@@ -97,6 +111,11 @@ If the pre-push hook is slow, investigate whether the test scope can be narrowed
 Lefthook is configured in `lefthook.yml` at the root of the repository. Example:
 
 ```yaml
+commit-msg:
+  commands:
+    conventional-commit:
+      run: npx commitlint --edit {1}
+
 pre-commit:
   parallel: true
   commands:
