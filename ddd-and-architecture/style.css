@@ -1,0 +1,28 @@
+#slidev-goto-dialog {
+  visibility: hidden;
+}
+
+.compare-graphs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.compare-graphs .graph-card {
+  min-width: 0;
+}
+
+.compare-graphs .graph-card h3 {
+  margin: 0 0 0.4rem 0;
+}
+
+.compare-graphs .graph-card :is(.mermaid, svg) {
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .compare-graphs {
+    grid-template-columns: 1fr;
+  }
+}
